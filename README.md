@@ -22,7 +22,7 @@ chmod +x install.sh
 
 3. Run the script
 ``` 
-sudo ./install.sh
+sh ./install.sh
 ```
 
 
