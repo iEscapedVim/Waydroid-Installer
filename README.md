@@ -12,17 +12,17 @@ Before running the script, make sure that your system is up-to-date and that you
 
 1. Download the script:
 ``` 
-    git clone https://github.com/YasirRWebDesigner/autodroid.git 
+git clone https://github.com/YasirRWebDesigner/autodroid.git 
 ```
 
 2. Make the script executeable 
 ```  
-    chmod +x install.sh
+chmod +x install.sh
 ```
 
 3. Run the script
 ``` 
-    sudo ./install.sh
+sudo ./install.sh
 ```
 
 
