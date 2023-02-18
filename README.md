@@ -28,4 +28,4 @@ sudo ./install.sh
 
 # Disclaimer
 
-The script has not been tested yet use it at your own risk.
+The script was tested on distrobox and main system had linux-zen/zen-headers preinstalled, use it at your own risk.
