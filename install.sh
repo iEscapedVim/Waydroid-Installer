@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 git clone https://aur.archlinux.org/python-pyclip.git
-cd python-pyclip
+cd python-pyclip || exit
 makepkg -cfsi
 cd ..
 sudo rm -rf python-pyclip
@@ -29,8 +29,8 @@ case $choice in
         else
           sudo pacman -S --noconfirm linux-headers
         fi
-         sudo dkms install binder_linux/1.3.1 -k $current_kernel
-         sudo dkms install ashmem_linux/1.3.1 -k $current_kernel
+         sudo dkms install binder_linux/1.3.1 -k "$current_kernel"
+         sudo dkms install ashmem_linux/1.3.1 -k "$current_kernel"
         ;;
     2)
         if pacman -Qs "linux-lts-headers" > /dev/null ; then
@@ -38,8 +38,8 @@ case $choice in
         else
            sudo pacman -S --noconfirm linux-lts-headers
         fi
-       sudo dkms install binder_linux/1.3.1 -k $current_kernel
-       sudo dkms install ashmem_linux/1.3.1 -k $current_kernel
+       sudo dkms install binder_linux/1.3.1 -k "$current_kernel"
+       sudo dkms install ashmem_linux/1.3.1 -k "$current_kernel"
         ;;
     3)
         if pacman -Qs "linux-zen-headers" > /dev/null ; then
@@ -53,12 +53,12 @@ case $choice in
             echo "linux-xanmod-anbox-headers is already installed"
         else
             git clone https://aur.archlinux.org/linux-xanmod-anbox.git
-            cd linux-xanmod-anbox
+            cd linux-xanmod-anbox || exit
             makepkg -cfsi
             cd ..
             sudo rm -rf linux-xanmod
             git clone https://aur.archlinux.org/linux-xanmod-anbox-headers.git
-            cd linux-xanmod-anbox-headers
+            cd linux-xanmod-anbox-headers || exit
             makepkg -cfsi
             cd ..
             sudo rm -rf linux-xanmod-headers
@@ -69,18 +69,20 @@ case $choice in
             echo "linux-xanmod-headers is already installed"
         else
             git clone https://aur.archlinux.org/linux-xanmod.git
-            cd linux-xanmod
+            cd linux-xanmod || exit
             makepkg -cfsi
             cd ..
             sudo rm -rf linux-xanmod
             git clone https://aur.archlinux.org/linux-xanmod-headers.git
-            cd linux-xanmod-headers
+            cd linux-xanmod-headers || exit
             makepkg -cfsi
             cd ..
             sudo rm -rf linux-xanmod-headers
         fi
+        ;;
     6)
         echo "Skipping headers..."
+        ;;
     *)
         echo "Invalid choice"
         exit 1
@@ -91,19 +93,19 @@ esac
 echo "Installing Waydroid Waydroid Extra/Script and Waydroid Settings"
 
 git clone https://aur.archlinux.org/waydroid-git.git
-cd waydroid-git
+cd waydroid-git || exit
 makepkg -cfsi
 cd ..
 sudo rm -rf waydroid-git
 
 git clone https://aur.archlinux.org/waydroid-script-git.git
-cd waydroid-script-git
+cd waydroid-script-git || exit
 makepkg -cfsi
 cd ..
 sudo rm -rf waydroid-script-git
 
 git clone https://aur.archlinux.org/waydroid-settings-git.git
-cd waydroid-settings-git
+cd waydroid-settings-git || exit
 makepkg -cfsi
 cd ..
 sudo rm -rf waydroid-settings-git
@@ -111,11 +113,11 @@ sudo rm -rf waydroid-settings-git
 
 # Run Waydroid init
 echo "Do you want to run Waydroid init? (y/n)"
-read run_init
+read -r run_init
 
 if [[ $run_init =~ ^[Yy]$ ]]; then
     echo "Which version of Waydroid do you want to install? Vanilla(v) or GAPPS(g)"
-    read waydroid_version
+    read -r waydroid_version
     if [[ $waydroid_version =~ ^[Gg]$ ]]; then
        sudo waydroid init -s GAPPS -f
     elif [[ $waydroid_version =~ ^[Vv]$ ]]; then
@@ -127,7 +129,7 @@ fi
 
 # Ask user if they want to start and enable the waydroid-container.service
 echo "Do you want to start and enable waydroid-container.service? (y/n)"
-read start_service
+read -r start_service
 
 if [[ $start_service =~ ^[Yy]$ ]]; then
     # Start and enable waydroid-container.service
