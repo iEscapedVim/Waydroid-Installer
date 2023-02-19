@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 git clone https://aur.archlinux.org/python-pyclip.git
+<<<<<<< HEAD
 cd python-pyclip
+=======
+cd python-pyclip python-pyclip
+>>>>>>> de1708336eb495044174cccd184cda6dc8c6fa76
 makepkg -cfsi
 cd ..
 sudo rm -rf python-pyclip
@@ -63,6 +67,11 @@ case $choice in
             cd ..
             sudo rm -rf linux-xanmod-headers
         fi
+<<<<<<< HEAD
+=======
+        sudo dkms install binder_linux/1.3.1 -k $current_kernel
+        sudo dkms install ashmem_linux/1.3.1 -k $current_kernel
+>>>>>>> de1708336eb495044174cccd184cda6dc8c6fa76
         ;;
     5)
         if pacman -Qs "linux-xanmod-headers" > /dev/null ; then
@@ -79,6 +88,11 @@ case $choice in
             cd ..
             sudo rm -rf linux-xanmod-headers
         fi
+<<<<<<< HEAD
+=======
+        sudo dkms install binder_linux/1.3.1 -k $current_kernel
+        sudo dkms install ashmem_linux/1.3.1 -k $current_kernel
+>>>>>>> de1708336eb495044174cccd184cda6dc8c6fa76
     6)
         echo "Skipping headers..."
     *)
