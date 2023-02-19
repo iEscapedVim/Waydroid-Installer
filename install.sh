@@ -1,26 +1,12 @@
-#!/bin/bash
-# Check if yay is installed
-if ! command -v yay &> /dev/null; then
-    read -p "yay is not installed. Do you want to install it? (y/n) " choice
-    case $choice in
-        [Yy]* )
- 	   # Install yay
- 	   sudo pacman -S --needed --noconfirm git base-devel xdg-utils mailcap
- 	   git clone https://aur.archlinux.org/yay-bin.git
- 	   cd yay-bin
-	   makepkg -si --noconfirm
-  	   cd ..
-   	   rm -rf yay-bin
-            echo "yay has been installed."
-            ;;
-        * )
-            echo "yay is required for this script to run. Exiting."
-            exit 1
-            ;;
-    esac
-fi
+#!/usr/bin/env bash
 
-yay -S --noconfirm python-pyclip dkms android-tools
+git clone https://aur.archlinux.org/python-pyclip.git
+cd python-pyclip
+makepkg -cfsi
+cd ..
+sudo rm -rf python-pyclip
+
+sudo pacman -S dkms android-tools
 
 # Determine the current kernel
 current_kernel=$(uname -r)
@@ -31,8 +17,10 @@ echo "Which kernel headers do you want to install?"
 echo "1. linux-headers"
 echo "2. linux-lts-headers"
 echo "3. linux-zen-headers"
-echo "4. linux-xanmod-headers"
-read -p "Enter your choice (1-4): " choice
+echo "4. linux-xanmod-anbox-headers"
+echo "5. linux-xanmod-headers"
+echo "6. I have my headers already"
+read -p "Enter your choice (1-6): " choice
 
 case $choice in
     1)
@@ -61,14 +49,38 @@ case $choice in
         fi
         ;;
     4)
+        if pacman -Qs "linux-xanmod-anbox-headers" > /dev/null ; then
+            echo "linux-xanmod-anbox-headers is already installed"
+        else
+            git clone https://aur.archlinux.org/linux-xanmod-anbox.git
+            cd linux-xanmod-anbox
+            makepkg -cfsi
+            cd ..
+            sudo rm -rf linux-xanmod
+            git clone https://aur.archlinux.org/linux-xanmod-anbox-headers.git
+            cd linux-xanmod-anbox-headers
+            makepkg -cfsi
+            cd ..
+            sudo rm -rf linux-xanmod-headers
+        fi
+        ;;
+    5)
         if pacman -Qs "linux-xanmod-headers" > /dev/null ; then
             echo "linux-xanmod-headers is already installed"
         else
-            yay -S --noconfirm linux-xanmod-anbox linux-xanmod-anbox-headers
+            git clone https://aur.archlinux.org/linux-xanmod.git
+            cd linux-xanmod
+            makepkg -cfsi
+            cd ..
+            sudo rm -rf linux-xanmod
+            git clone https://aur.archlinux.org/linux-xanmod-headers.git
+            cd linux-xanmod-headers
+            makepkg -cfsi
+            cd ..
+            sudo rm -rf linux-xanmod-headers
         fi
-       sudo dkms install binder_linux/1.3.1 -k $current_kernel
-       sudo dkms install ashmem_linux/1.3.1 -k $current_kernel
-        ;;
+    6)
+        echo "Skipping headers..."
     *)
         echo "Invalid choice"
         exit 1
@@ -77,7 +89,25 @@ esac
 
 # Install Waydroid
 echo "Installing Waydroid Waydroid Extra/Script and Waydroid Settings"
-yay -S --noconfirm waydroid-git waydroid-script-git waydroid-settings-git
+
+git clone https://aur.archlinux.org/waydroid-git.git
+cd waydroid-git
+makepkg -cfsi
+cd ..
+sudo rm -rf waydroid-git
+
+git clone https://aur.archlinux.org/waydroid-script-git.git
+cd waydroid-script-git
+makepkg -cfsi
+cd ..
+sudo rm -rf waydroid-script-git
+
+git clone https://aur.archlinux.org/waydroid-settings-git.git
+cd waydroid-settings-git
+makepkg -cfsi
+cd ..
+sudo rm -rf waydroid-settings-git
+
 
 # Run Waydroid init
 echo "Do you want to run Waydroid init? (y/n)"
