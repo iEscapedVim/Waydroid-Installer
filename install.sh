@@ -20,7 +20,7 @@ echo "3. linux-zen-headers"
 echo "4. linux-xanmod-anbox-headers"
 echo "5. linux-xanmod-headers"
 echo "6. I have my headers already"
-read -p "Enter your choice (1-6): " choice
+read -r -p "Enter your choice (1-6): " choice
 
 case $choice in
     1)
