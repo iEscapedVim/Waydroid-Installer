@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -xe
 git clone https://aur.archlinux.org/python-pyclip.git
 cd python-pyclip || exit
 makepkg -cfsi
@@ -52,11 +52,6 @@ case $choice in
         if pacman -Qs "linux-xanmod-anbox-headers" > /dev/null ; then
             echo "linux-xanmod-anbox-headers is already installed"
         else
-            git clone https://aur.archlinux.org/linux-xanmod-anbox.git
-            cd linux-xanmod-anbox || exit
-            makepkg -cfsi
-            cd ..
-            sudo rm -rf linux-xanmod
             git clone https://aur.archlinux.org/linux-xanmod-anbox-headers.git
             cd linux-xanmod-anbox-headers || exit
             makepkg -cfsi
@@ -68,11 +63,6 @@ case $choice in
         if pacman -Qs "linux-xanmod-headers" > /dev/null ; then
             echo "linux-xanmod-headers is already installed"
         else
-            git clone https://aur.archlinux.org/linux-xanmod.git
-            cd linux-xanmod || exit
-            makepkg -cfsi
-            cd ..
-            sudo rm -rf linux-xanmod
             git clone https://aur.archlinux.org/linux-xanmod-headers.git
             cd linux-xanmod-headers || exit
             makepkg -cfsi
