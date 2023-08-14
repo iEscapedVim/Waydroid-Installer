@@ -1,21 +1,12 @@
-name: ShellCheck
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
-  
-permissions:
-  contents: read
+name: Spellcheck Action
+on: push
 
 jobs:
-  shellcheck:
-    name: ShellCheck
+  build:
+    name: Spellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@master
-        with:
-          format: gcc
+    # The checkout step
+    - uses: actions/checkout@v3
+    - uses: rojopolis/spellcheck-github-actions@0.33.1
+      name: Spellcheck
