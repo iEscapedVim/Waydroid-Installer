@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -xe
+echo "removing any old files."
 rm -rf ~/.config/autodroid
 mkdir ~/.config/autodroid
 cd ~/.config/autodroid
+echo "Starting Installation."
 git clone https://aur.archlinux.org/python-pyclip.git
 cd python-pyclip || exit
 makepkg -cfsi
