@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 set -xe
+rm -rf ~/.config/autodroid
+mkdir ~/.config/autodroid
+cd ~/.config/autodroid
 git clone https://aur.archlinux.org/python-pyclip.git
 cd python-pyclip || exit
 makepkg -cfsi
@@ -80,7 +83,7 @@ case $choice in
 esac
 
 # Install Waydroid
-echo "Installing Waydroid Waydroid Extra/Script and Waydroid Settings"
+echo "Installing Waydroid, Waydroid Script and Waydroid Settings"
 
 git clone https://aur.archlinux.org/waydroid-git.git
 cd waydroid-git || exit
@@ -88,11 +91,10 @@ makepkg -cfsi
 cd ..
 sudo rm -rf waydroid-git
 
-git clone https://aur.archlinux.org/waydroid-script-git.git
-cd waydroid-script-git || exit
-makepkg -cfsi
+git clone https://github.com/casualsnek/waydroid_script
+cd waydroid_script || exit
+mv * ..
 cd ..
-sudo rm -rf waydroid-script-git
 
 git clone https://aur.archlinux.org/waydroid-settings-git.git
 cd waydroid-settings-git || exit
@@ -131,3 +133,4 @@ else
 fi
 
 echo "Installation complete. Reboot the system to start using Waydroid."
+echo "To use Waydroid Script goto ~/.config/autodroid in Terminal & Enter Waydroid Script's Commands."
