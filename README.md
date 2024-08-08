@@ -4,7 +4,7 @@
 
 # Overview
 
-This shell script automates the installation of Waydroid on Arch Linux. Waydroid is an Android application compatibility layer for Linux that allows you to run Android applications on your Arch Linux desktop. This script downloads and installs Waydroid from the official GitHub repository, and starts the required services.
+Simplify Waydroid installation on Arch or Arch-based Linux systems. This script automates the entire process, from downloading and installing Waydroid to starting essential services. Enjoy running Android apps seamlessly on your Arch Linux desktop.
 
 ## Prerequisites
 
