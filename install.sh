@@ -7,7 +7,7 @@ cd ~/.config/autodroid
 echo "Starting Installation."
 git clone https://aur.archlinux.org/python-pyclip.git
 cd python-pyclip || exit
-makepkg -cfsi
+makepkg -cfsi --noconfirm
 cd ..
 sudo rm -rf python-pyclip
 
@@ -59,7 +59,7 @@ case $choice in
         else
             git clone https://aur.archlinux.org/linux-xanmod-anbox-headers.git
             cd linux-xanmod-anbox-headers || exit
-            makepkg -cfsi
+            makepkg -cfsi --noconfirm
             cd ..
             sudo rm -rf linux-xanmod-headers
         fi
@@ -70,7 +70,7 @@ case $choice in
         else
             git clone https://aur.archlinux.org/linux-xanmod-headers.git
             cd linux-xanmod-headers || exit
-            makepkg -cfsi
+            makepkg -cfsi --noconfirm
             cd ..
             sudo rm -rf linux-xanmod-headers
         fi
@@ -89,7 +89,7 @@ echo "Installing Waydroid, Waydroid Script and Waydroid Settings"
 
 git clone https://aur.archlinux.org/waydroid-git.git
 cd waydroid-git || exit
-makepkg -cfsi
+makepkg -cfsi --noconfirm
 cd ..
 sudo rm -rf waydroid-git
 
@@ -100,7 +100,7 @@ cd ..
 
 git clone https://aur.archlinux.org/waydroid-settings-git.git
 cd waydroid-settings-git || exit
-makepkg -cfsi
+makepkg -cfsi --noconfirm
 cd ..
 sudo rm -rf waydroid-settings-git
 
