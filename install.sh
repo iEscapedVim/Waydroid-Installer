@@ -486,8 +486,8 @@ interactive() {
 # ---------------------------------------------------------------------------
 # Flags for scripting. With no flag at all it runs the interactive menu.
 # ---------------------------------------------------------------------------
-MODE="$1"
-case "${MODE:-}" in
+MODE="${1:-}"
+case "${MODE}" in
     -h|--help)
         echo "Usage: ./install.sh [--uninstall]"
         echo "With no flag it runs the interactive menu."
@@ -496,6 +496,6 @@ case "${MODE:-}" in
     --uninstall) uninstall_waydroid ;;
     interactive|--interactive|"") interactive ;;
     *)
-        die "Unknown option: $1. Try --help."
+        die "Unknown option: $MODE. Try --help."
         ;;
 esac
